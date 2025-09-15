@@ -1,12 +1,11 @@
 import pytest
-from livekit.agents import AgentSession, llm
-from livekit.plugins import openai
+from livekit.agents import AgentSession, llm, inference
 
 from agent import Assistant
 
 
 def _llm() -> llm.LLM:
-    return openai.LLM(model="gpt-4o-mini")
+    return inference.LLM(model="openai/gpt-4o-mini")
 
 
 @pytest.mark.asyncio

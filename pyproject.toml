@@ -9,10 +9,13 @@ description = "Simple voice AI assistant built with LiveKit Agents for Python"
 requires-python = ">=3.9"
 
 dependencies = [
-    "livekit-agents[openai,turn-detector,silero,cartesia,deepgram]~=1.2",
+    "livekit-agents[turn-detector,silero]~=1.2",
     "livekit-plugins-noise-cancellation~=0.2",
     "python-dotenv",
 ]
+
+[tool.uv.sources]
+livekit-agents = { git = "https://github.com/livekit/agents.git", branch = "longc/cloud-inference-draft", subdirectory = "livekit-agents"}
 
 [dependency-groups]
 dev = [

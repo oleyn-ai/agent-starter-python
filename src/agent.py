@@ -72,7 +72,7 @@ async def entrypoint(ctx: JobContext):
         stt="deepgram/nova-3",
         # Text-to-speech (TTS) is your agent's voice, turning the LLM's text into speech that the user can hear
         # See all providers at https://docs.livekit.io/agents/integrations/tts/
-        tts="elevenlabs:cgSgspJ2msm6clMCkdW9",
+        tts="cartesia:6f84f4b8-58a2-430c-8c79-688dad597532",
         # VAD and turn detection are used to determine when the user is speaking and when the agent should respond
         # See more at https://docs.livekit.io/agents/build/turns
         # turn_detection=MultilingualModel(),

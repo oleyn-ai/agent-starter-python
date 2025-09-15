@@ -64,14 +64,14 @@ async def entrypoint(ctx: JobContext):
     # Set up a voice AI pipeline using OpenAI, Cartesia, Deepgram, and the LiveKit turn detector
     session = AgentSession(
         # A Large Language Model (LLM) is your agent's brain, processing user input and generating a response
-        # See all providers at https://docs.livekit.io/agents/integrations/llm/
+        # See all available models at https://docs.livekit.io/agents/models/llm/
         llm="openai/gpt-4o-mini",
         # Speech-to-text (STT) is your agent's ears, turning the user's speech into text that the LLM can understand
-        # See all providers at https://docs.livekit.io/agents/integrations/stt/
+        # See all available models at https://docs.livekit.io/agents/models/stt/
         stt="deepgram/nova-3",
         # Text-to-speech (TTS) is your agent's voice, turning the LLM's text into speech that the user can hear
-        # See all providers at https://docs.livekit.io/agents/integrations/tts/
-        tts="cartesia:6f84f4b8-58a2-430c-8c79-688dad597532",
+        # See all available models as well as voice selections at https://docs.livekit.io/agents/models/tts/
+        tts="cartesia/sonic-2:6f84f4b8-58a2-430c-8c79-688dad597532",
         # VAD and turn detection are used to determine when the user is speaking and when the agent should respond
         # See more at https://docs.livekit.io/agents/build/turns
         # turn_detection=MultilingualModel(),
@@ -82,7 +82,7 @@ async def entrypoint(ctx: JobContext):
     )
 
     # To use a realtime model instead of a voice pipeline, use the following session setup instead.
-    # This is for OpenAI Realtime API, for other providers, see https://docs.livekit.io/agents/integrations/realtime/
+    # (Note: This is for the OpenAI Realtime API. For other providers, see https://docs.livekit.io/agents/models/realtime/))
     # 1. Install livekit-agents[openai]
     # 2. Set OPENAI_API_KEY in .env.local
     # 3. Add `from livekit.plugins import openai` to the top of this file

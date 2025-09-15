@@ -10,12 +10,10 @@ from livekit.agents import (
     JobProcess,
     MetricsCollectedEvent,
     RoomInputOptions,
-    RunContext,
     WorkerOptions,
     cli,
     metrics,
 )
-from livekit.agents.llm import function_tool
 from livekit.plugins import noise_cancellation, silero
 from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
@@ -33,21 +31,22 @@ class Assistant(Agent):
             You are curious, friendly, and have a sense of humor.""",
         )
 
-    # all functions annotated with @function_tool will be passed to the LLM when this
-    # agent is active
-    @function_tool
-    async def lookup_weather(self, context: RunContext, location: str):
-        """Use this tool to look up current weather information in the given location.
-
-        If the location is not supported by the weather service, the tool will indicate this. You must tell the user the location's weather is unavailable.
-
-        Args:
-            location: The location to look up weather information for (e.g. city name)
-        """
-
-        logger.info(f"Looking up weather for {location}")
-
-        return "sunny with a temperature of 70 degrees."
+    # To add tools, use the @function_tool decorator.
+    # Here's an example that adds a simple weather tool.
+    # You also have to add `from livekit.agents.llm import function_tool, RunContext` to the top of this file
+    # @function_tool
+    # async def lookup_weather(self, context: RunContext, location: str):
+    #     """Use this tool to look up current weather information in the given location.
+    #
+    #     If the location is not supported by the weather service, the tool will indicate this. You must tell the user the location's weather is unavailable.
+    #
+    #     Args:
+    #         location: The location to look up weather information for (e.g. city name)
+    #     """
+    #
+    #     logger.info(f"Looking up weather for {location}")
+    #
+    #     return "sunny with a temperature of 70 degrees."
 
 
 def prewarm(proc: JobProcess):

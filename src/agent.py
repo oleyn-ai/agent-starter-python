@@ -16,7 +16,7 @@ from livekit.agents import (
     metrics,
 )
 from livekit.agents.llm import function_tool
-from livekit.plugins import cartesia, deepgram, noise_cancellation, openai, silero
+from livekit.plugins import noise_cancellation, silero
 from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
 logger = logging.getLogger("agent")
@@ -51,7 +51,8 @@ class Assistant(Agent):
 
 
 def prewarm(proc: JobProcess):
-    proc.userdata["vad"] = silero.VAD.load()
+    pass
+    # proc.userdata["vad"] = silero.VAD.load()
 
 
 async def entrypoint(ctx: JobContext):
@@ -65,25 +66,29 @@ async def entrypoint(ctx: JobContext):
     session = AgentSession(
         # A Large Language Model (LLM) is your agent's brain, processing user input and generating a response
         # See all providers at https://docs.livekit.io/agents/integrations/llm/
-        llm=openai.LLM(model="gpt-4o-mini"),
+        llm="openai/gpt-4o-mini",
         # Speech-to-text (STT) is your agent's ears, turning the user's speech into text that the LLM can understand
         # See all providers at https://docs.livekit.io/agents/integrations/stt/
-        stt=deepgram.STT(model="nova-3", language="multi"),
+        stt="deepgram/nova-3",
         # Text-to-speech (TTS) is your agent's voice, turning the LLM's text into speech that the user can hear
         # See all providers at https://docs.livekit.io/agents/integrations/tts/
-        tts=cartesia.TTS(voice="6f84f4b8-58a2-430c-8c79-688dad597532"),
+        tts="elevenlabs:cgSgspJ2msm6clMCkdW9",
         # VAD and turn detection are used to determine when the user is speaking and when the agent should respond
         # See more at https://docs.livekit.io/agents/build/turns
-        turn_detection=MultilingualModel(),
-        vad=ctx.proc.userdata["vad"],
+        # turn_detection=MultilingualModel(),
+        # vad=ctx.proc.userdata["vad"],
         # allow the LLM to generate a response while waiting for the end of turn
         # See more at https://docs.livekit.io/agents/build/audio/#preemptive-generation
         preemptive_generation=True,
     )
 
-    # To use a realtime model instead of a voice pipeline, use the following session setup instead:
+    # To use a realtime model instead of a voice pipeline, use the following session setup instead.
+    # This is for OpenAI Realtime API, for other providers, see https://docs.livekit.io/agents/integrations/realtime/
+    # 1. Install livekit-agents[openai]
+    # 2. Set OPENAI_API_KEY in .env.local
+    # 3. Add `from livekit.plugins import openai` to the top of this file
+    # 4. Use the following session setup instead of the version above
     # session = AgentSession(
-    #     # See all providers at https://docs.livekit.io/agents/integrations/realtime/
     #     llm=openai.realtime.RealtimeModel(voice="marin")
     # )
 

@@ -16,7 +16,7 @@ from livekit.agents import (
     inference,
 )
 from livekit.plugins import noise_cancellation, silero
-from livekit.plugins.turn_detector.english import EnglishModel
+from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
 logger = logging.getLogger("agent")
 
@@ -68,13 +68,13 @@ async def entrypoint(ctx: JobContext):
         llm="azure/gpt-4o-mini",
         # Speech-to-text (STT) is your agent's ears, turning the user's speech into text that the LLM can understand
         # See all available models at https://docs.livekit.io/agents/models/stt/
-        stt=inference.STT(language="en"),
+        stt=inference.STT(language="multi"),
         # Text-to-speech (TTS) is your agent's voice, turning the LLM's text into speech that the user can hear
         # See all available models as well as voice selections at https://docs.livekit.io/agents/models/tts/
-        tts="cartesia/sonic-2:6f84f4b8-58a2-430c-8c79-688dad597532",
+        tts="cartesia/sonic-2:f786b574-daa5-4673-aa0c-cbe3e8534c02",
         # VAD and turn detection are used to determine when the user is speaking and when the agent should respond
         # See more at https://docs.livekit.io/agents/build/turns
-        turn_detection=EnglishModel(),
+        turn_detection=MultilingualModel(),
         vad=ctx.proc.userdata["vad"],
         # allow the LLM to generate a response while waiting for the end of turn
         # See more at https://docs.livekit.io/agents/build/audio/#preemptive-generation

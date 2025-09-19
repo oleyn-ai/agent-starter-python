@@ -114,9 +114,9 @@ async def entrypoint(ctx: JobContext):
     ctx.add_shutdown_callback(log_usage)
 
     # # Add a virtual avatar to the session, if desired
-    # # For other providers, see https://docs.livekit.io/agents/integrations/avatar/
+    # # For other providers, see https://docs.livekit.io/agents/models/avatar/
     # avatar = hedra.AvatarSession(
-    #   avatar_id="...",  # See https://docs.livekit.io/agents/integrations/avatar/hedra
+    #   avatar_id="...",  # See https://docs.livekit.io/agents/models/avatar/plugins/hedra
     # )
     # # Start the avatar and wait for it to join
     # await avatar.start(session, room=ctx.room)

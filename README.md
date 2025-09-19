@@ -28,7 +28,7 @@ cd agent-starter-python
 uv sync
 ```
 
-Sign up for [Livekit Cloud](https://cloud.livekit.io/) then set up the environment by copying `.env.example` to `.env.local` and filling in the required keys:
+Sign up for [LiveKit Cloud](https://cloud.livekit.io/) then set up the environment by copying `.env.example` to `.env.local` and filling in the required keys:
 
 - `LIVEKIT_URL`
 - `LIVEKIT_API_KEY`

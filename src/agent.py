@@ -1,8 +1,11 @@
 from dotenv import load_dotenv
 import logging
+import os
+import json
+from datetime import datetime
 
 from livekit import agents
-from livekit.agents import AgentSession, Agent, RoomInputOptions, llm, function_tool
+from livekit.agents import AgentSession, Agent, RoomInputOptions, function_tool
 from livekit.plugins import (
     openai,
     cartesia,
@@ -15,31 +18,23 @@ from livekit.plugins.turn_detector.multilingual import MultilingualModel
 load_dotenv(".env.local")
 
 logger = logging.getLogger(__name__)
-
+logging.basicConfig(level=logging.INFO)
 
 
 class Assistant(Agent):
     def __init__(self) -> None:
-        # Create the weather tool
         @function_tool()
         async def get_weather(city: str) -> str:
-            """
-            Get the current weather for a given city.
-            
-            Args:
-                city (str): The name of the city to get weather for
-                
-            Returns:
-                str: Weather information for the city
-            """
             logger.info(f"Weather requested for city: {city}")
-            # Dummy weather API - always returns 70 degrees
             return f"The current weather in {city} is 70 degrees Fahrenheit with sunny skies."
 
-        
         super().__init__(
-            instructions="You are a helpful voice AI assistant. You can provide weather information for any city when asked. When users ask about the weather, use the get_weather function to get current weather data.",
-            tools=[get_weather]
+            instructions=(
+                "You are a helpful voice AI assistant. "
+                "You can provide weather information for any city when asked. "
+                "When users ask about the weather, use the get_weather function to get current weather data."
+            ),
+            tools=[get_weather],
         )
 
 
@@ -50,20 +45,39 @@ async def entrypoint(ctx: agents.JobContext):
         tts=cartesia.TTS(model="sonic-2", voice="f786b574-daa5-4673-aa0c-cbe3e8534c02"),
         vad=silero.VAD.load(),
         turn_detection=MultilingualModel(),
+        # optionally enable TTS‐aligned transcripts:
+        # use_tts_aligned_transcript=True,
     )
 
-    # session = AgentSession(
-    #     llm=openai.realtime.RealtimeModel(
-    #         voice="coral"
-    #     )
-    # )
+    # Prepare a log filename (use room name + timestamp or something meaningful)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    room_name = ctx.room.name
+    filename = f"conversation_{room_name}_{timestamp}.json"
+    os.makedirs("logs", exist_ok=True)
+    filepath = os.path.join("logs", filename)
+    logger.info(f"Will save conversation history to {filepath}")
+
+    # Register shutdown callback to dump history at end
+    async def write_transcript():
+        try:
+            hist = session.history.to_dict()
+        except Exception as e:
+            logger.error("Failed to get session.history", exc_info=e)
+            return
+
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(hist, f, indent=2, ensure_ascii=False)
+        logger.info(f"Saved transcript to {filepath}")
+
+    ctx.add_shutdown_callback(write_transcript)
+
+
 
     await session.start(
         room=ctx.room,
         agent=Assistant(),
         room_input_options=RoomInputOptions(
-            # For telephony applications, use `BVCTelephony` instead for best results
-            noise_cancellation=noise_cancellation.BVC(), 
+            noise_cancellation=noise_cancellation.BVC(),
         ),
     )
 

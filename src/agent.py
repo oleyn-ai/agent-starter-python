@@ -14,16 +14,9 @@ from livekit.plugins import (
     silero,
 )
 from livekit.plugins.turn_detector.multilingual import MultilingualModel
-from config import SALES_AGENT_PROMPT, PRODUCT_INFO
+from config import SALES_AGENT_PROMPT
 from livekit.agents.voice import RunContext
-from dataclasses import dataclass
-
-@dataclass
-class userInfo:
-    user_name: str | None = None
-    phone_number: str | None = None
-    wants_to_buy: bool | None = None
-    conversation_completed: bool = False
+from schema import userInfo
 
 
 load_dotenv(".env.local")
@@ -36,19 +29,13 @@ class SalesAgent(Agent):
     def __init__(self) -> None:
         super().__init__(
             instructions=(
-                SALES_AGENT_PROMPT + "This is the product information: " + PRODUCT_INFO +
-                "\n\nYour goal is to persuade the customer to buy this product. "
-                "Answer any questions they have about the product. "
-                "Once you've presented the product and answered their questions, "
-                "ask if they would like to purchase it. "
-                "If they say yes, collect their name and phone number, then say goodbye. "
-                "If they say no, politely thank them for their time and say goodbye."
+                SALES_AGENT_PROMPT
             ),
         )
 
     @function_tool()
     async def record_purchase_decision(self, context: RunContext[userInfo], wants_to_buy: bool):
-        """Use this tool when the customer has made a clear decision about whether they want to buy the product or not."""
+        """Use this tool when the customer has made a decision about whether they want to buy the product or not."""
         context.userdata.wants_to_buy = wants_to_buy
         if wants_to_buy:
             return "Great! I'll need to collect some information from you to complete the purchase."
@@ -75,15 +62,23 @@ class SalesAgent(Agent):
 
 
 async def entrypoint(ctx: agents.JobContext):
+        # session = AgentSession[userInfo](
+        #     userdata=userInfo(),
+    #     stt=deepgram.STT(model="nova-3", language="multi"),
+    #     llm=openai.LLM(model="gpt-4o-mini"),
+    #     tts=cartesia.TTS(model="sonic-2", voice="f786b574-daa5-4673-aa0c-cbe3e8534c02"),
+    #     vad=silero.VAD.load(),
+    #     turn_detection=MultilingualModel(),
+    #     # optionally enable TTS‐aligned transcripts:
+    #     # use_tts_aligned_transcript=True,
+    # )
+
     session = AgentSession[userInfo](
         userdata=userInfo(),
-        stt=deepgram.STT(model="nova-3", language="multi"),
-        llm=openai.LLM(model="gpt-4o-mini"),
-        tts=cartesia.TTS(model="sonic-2", voice="f786b574-daa5-4673-aa0c-cbe3e8534c02"),
-        vad=silero.VAD.load(),
-        turn_detection=MultilingualModel(),
-        # optionally enable TTS‐aligned transcripts:
-        # use_tts_aligned_transcript=True,
+        llm=openai.realtime.RealtimeModel(
+            voice="coral",
+
+        )
     )
 
     # Prepare a log filename (use room name + timestamp or something meaningful)
@@ -144,7 +139,7 @@ async def entrypoint(ctx: agents.JobContext):
     )
 
     await session.generate_reply(
-        instructions="Greet the user warmly and introduce the product you're selling. Be enthusiastic and helpful."
+        instructions=SALES_AGENT_PROMPT
     )
 
 

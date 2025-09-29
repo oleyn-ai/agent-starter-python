@@ -1,0 +1,74 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "name": "Wireless Bluetooth Headphones",
+        "description": "High-quality wireless headphones with noise cancellation and 30-hour battery life",
+        "price": 199.99,
+        "discount": 15
+      },
+      {
+        "id": 2,
+        "name": "Smart Fitness Watch",
+        "description": "Advanced fitness tracker with heart rate monitoring, GPS, and water resistance",
+        "price": 299.99,
+        "discount": 20
+      },
+      {
+        "id": 3,
+        "name": "Organic Coffee Beans",
+        "description": "Premium organic coffee beans from Colombia, medium roast, 1lb bag",
+        "price": 24.99,
+        "discount": 10
+      },
+      {
+        "id": 4,
+        "name": "Portable Phone Charger",
+        "description": "High-capacity 20000mAh portable charger with fast charging and LED display",
+        "price": 49.99,
+        "discount": 25
+      },
+      {
+        "id": 5,
+        "name": "Stainless Steel Water Bottle",
+        "description": "Insulated stainless steel water bottle that keeps drinks cold for 24 hours",
+        "price": 34.99,
+        "discount": 12
+      },
+      {
+        "id": 6,
+        "name": "Wireless Gaming Mouse",
+        "description": "Ergonomic wireless gaming mouse with RGB lighting and programmable buttons",
+        "price": 79.99,
+        "discount": 18
+      },
+      {
+        "id": 7,
+        "name": "Yoga Mat Premium",
+        "description": "Non-slip yoga mat made from eco-friendly materials, extra thick for comfort",
+        "price": 39.99,
+        "discount": 8
+      },
+      {
+        "id": 8,
+        "name": "LED Desk Lamp",
+        "description": "Adjustable LED desk lamp with touch control and USB charging port",
+        "price": 59.99,
+        "discount": 22
+      },
+      {
+        "id": 9,
+        "name": "Bluetooth Speaker",
+        "description": "Portable Bluetooth speaker with 360-degree sound and waterproof design",
+        "price": 89.99,
+        "discount": 30
+      },
+      {
+        "id": 10,
+        "name": "Mechanical Keyboard",
+        "description": "RGB mechanical keyboard with Cherry MX switches and aluminum frame",
+        "price": 149.99,
+        "discount": 16
+      }
+    ]
+  }

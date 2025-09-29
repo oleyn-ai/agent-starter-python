@@ -1,0 +1,193 @@
+{
+  "conversation_history": {
+    "items": [
+      {
+        "id": "item_300a5be0e352",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          "Hello there! I'm thrilled to introduce you to a fantastic product – the **Bluetooth Speaker**! \n\nThis portable speaker delivers incredible 360-degree sound, allowing you to enjoy your favorite music from any angle. Plus, it features a waterproof design, making it perfect for outdoor adventures, pool parties, or simply relaxing at home without worrying about spills!\n\nRight now, it's priced at just **$89.99**, and there's a limited-time discount of **$30**, making it an even more enticing deal!\n\nDo you have any questions about the Bluetooth speaker? I'm here to help!"
+        ],
+        "interrupted": false
+      },
+      {
+        "id": "item_0b924c349a31",
+        "type": "message",
+        "role": "user",
+        "content": [
+          "Yes. Can I get the price to be any lower than that?"
+        ],
+        "interrupted": false,
+        "transcript_confidence": 1.0
+      },
+      {
+        "id": "item_669842d191e4",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          "The current price of **$89.99** already includes a **$30 discount**, which gives you a fantastic value for such a high-quality, versatile product. Unfortunately, we can't lower the price further at this time. \n\nHowever, considering its portable nature, 360-degree sound quality, and waterproof design, this speaker is a great investment for both indoor and outdoor use. It's perfect for creating memories at gatherings or"
+        ],
+        "interrupted": true
+      },
+      {
+        "id": "item_78b2332a6cc2",
+        "type": "message",
+        "role": "user",
+        "content": [
+          "Okay. You know what? I'm going to buy it."
+        ],
+        "interrupted": false,
+        "transcript_confidence": 1.0
+      },
+      {
+        "id": "item_c3a025dffc7f",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          "That's awesome to hear! I'm sure you're going to love the Bluetooth Speaker. Can I have your name, please?"
+        ],
+        "interrupted": false
+      },
+      {
+        "id": "item_54d0a9dd6983",
+        "type": "message",
+        "role": "user",
+        "content": [
+          "Yes. My name is Annabelle."
+        ],
+        "interrupted": false,
+        "transcript_confidence": 0.99902344
+      },
+      {
+        "id": "item_293ad4a9eaa9",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          "Thank you, Annabelle! Now, could you please provide your phone number so we can finalize your purchase?"
+        ],
+        "interrupted": false
+      },
+      {
+        "id": "item_32bc33a14b11",
+        "type": "message",
+        "role": "user",
+        "content": [
+          "Yes. Zero one seven seven two eight zero zero two five zero."
+        ],
+        "interrupted": false,
+        "transcript_confidence": 0.9975586000000001
+      },
+      {
+        "id": "item_7c83a41e5408/fnc_0",
+        "type": "function_call",
+        "call_id": "call_HPf6wVkPkQa3Min58MkxXCbu",
+        "arguments": "{\"name\": \"Annabelle\"}",
+        "name": "record_name"
+      },
+      {
+        "id": "item_7c83a41e5408/fnc_1",
+        "type": "function_call",
+        "call_id": "call_wjONLHXTOArKv9la1LdgGGfa",
+        "arguments": "{\"phone_number\": \"017772800250\"}",
+        "name": "record_phone_number"
+      },
+      {
+        "id": "item_7e51f30d2405",
+        "type": "function_call_output",
+        "name": "record_name",
+        "call_id": "call_HPf6wVkPkQa3Min58MkxXCbu",
+        "output": "Please let me know if you'd like to purchase the product first.",
+        "is_error": false
+      },
+      {
+        "id": "item_297a4e9db8a1",
+        "type": "function_call_output",
+        "name": "record_phone_number",
+        "call_id": "call_wjONLHXTOArKv9la1LdgGGfa",
+        "output": "Please provide your name first after agreeing to the purchase.",
+        "is_error": false
+      },
+      {
+        "id": "item_ad980e006b3a",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          "Thank you, Annabelle! I'm excited to finalize your purchase. Just to confirm, you want to proceed with buying the Bluetooth Speaker, correct?"
+        ],
+        "interrupted": false
+      },
+      {
+        "id": "item_3d99d79e3877",
+        "type": "message",
+        "role": "user",
+        "content": [
+          "Yes."
+        ],
+        "interrupted": false,
+        "transcript_confidence": 0.99560547
+      },
+      {
+        "id": "item_d5a7d87e257a/fnc_0",
+        "type": "function_call",
+        "call_id": "call_2x0BXAOVG83ImJCgI2DGJqvJ",
+        "arguments": "{\"wants_to_buy\": true}",
+        "name": "record_purchase_decision"
+      },
+      {
+        "id": "item_d5a7d87e257a/fnc_1",
+        "type": "function_call",
+        "call_id": "call_GWvnzOdq8BPecVnkiUZv3qjV",
+        "arguments": "{\"name\": \"Annabelle\"}",
+        "name": "record_name"
+      },
+      {
+        "id": "item_d5a7d87e257a/fnc_2",
+        "type": "function_call",
+        "call_id": "call_Ke9YWW9AaLZ6BYRdgdqo7JEp",
+        "arguments": "{\"phone_number\": \"017772800250\"}",
+        "name": "record_phone_number"
+      },
+      {
+        "id": "item_11d50ed07b4e",
+        "type": "function_call_output",
+        "name": "record_purchase_decision",
+        "call_id": "call_2x0BXAOVG83ImJCgI2DGJqvJ",
+        "output": "Great! I'll need to collect some information from you to complete the purchase.",
+        "is_error": false
+      },
+      {
+        "id": "item_d43f6441e4fd",
+        "type": "function_call_output",
+        "name": "record_name",
+        "call_id": "call_GWvnzOdq8BPecVnkiUZv3qjV",
+        "output": "Thank you, Annabelle! Now I'll need your phone number.",
+        "is_error": false
+      },
+      {
+        "id": "item_98e401c00ac6",
+        "type": "function_call_output",
+        "name": "record_phone_number",
+        "call_id": "call_Ke9YWW9AaLZ6BYRdgdqo7JEp",
+        "output": "Perfect! Thank you Annabelle, we have your information. Someone will contact you at 017772800250 to complete the purchase. Have a great day!",
+        "is_error": false
+      },
+      {
+        "id": "item_ec71f873ef56",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          "Great! Thank you, Annabelle! Your purchase of the Bluetooth Speaker is all set. You'll receive a call shortly at **017772800250** to complete the process.\n\nIf you have any more questions or need assistance in the future, feel free to reach out. Have a fantastic day and enjoy your new speaker! Goodbye!"
+        ],
+        "interrupted": false
+      }
+    ]
+  },
+  "session_outcome": {
+    "wants_to_buy": true,
+    "user_name": "Annabelle",
+    "phone_number": "017772800250",
+    "conversation_completed": true,
+    "timestamp": "20250929_140551",
+    "room_name": "mock_room"
+  }
+}

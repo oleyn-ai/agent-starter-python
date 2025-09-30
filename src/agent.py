@@ -19,7 +19,7 @@ from livekit.agents.voice import RunContext
 from schema import userInfo
 
 
-load_dotenv(".env.local")
+load_dotenv(".env")
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)

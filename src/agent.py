@@ -62,24 +62,24 @@ class SalesAgent(Agent):
 
 
 async def entrypoint(ctx: agents.JobContext):
-        # session = AgentSession[userInfo](
-        #     userdata=userInfo(),
-    #     stt=deepgram.STT(model="nova-3", language="multi"),
-    #     llm=openai.LLM(model="gpt-4o-mini"),
-    #     tts=cartesia.TTS(model="sonic-2", voice="f786b574-daa5-4673-aa0c-cbe3e8534c02"),
-    #     vad=silero.VAD.load(),
-    #     turn_detection=MultilingualModel(),
-    #     # optionally enable TTS‐aligned transcripts:
-    #     # use_tts_aligned_transcript=True,
-    # )
-
     session = AgentSession[userInfo](
         userdata=userInfo(),
-        llm=openai.realtime.RealtimeModel(
-            voice="coral",
-
-        )
+        stt=deepgram.STT(model="nova-3", language="en"),
+        llm=openai.LLM(model="gpt-4o-mini"),
+        tts=cartesia.TTS(model="sonic-2", voice="f786b574-daa5-4673-aa0c-cbe3e8534c02"),
+        vad=silero.VAD.load(),
+        turn_detection=MultilingualModel(),
+        # optionally enable TTS‐aligned transcripts:
+        # use_tts_aligned_transcript=True,
     )
+
+    # session = AgentSession[userInfo](
+    #     userdata=userInfo(),
+    #     llm=openai.realtime.RealtimeModel(
+    #         voice="coral",
+
+    #     )
+    # )
 
     # Prepare a log filename (use room name + timestamp or something meaningful)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
